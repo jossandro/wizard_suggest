@@ -1,0 +1,4 @@
+jdbcDriver=org.gjt.mm.mysql.Driver
+jdbcURL=jdbc:mysql://server:3306/sgbd
+database.user=user_database
+database.pass=password

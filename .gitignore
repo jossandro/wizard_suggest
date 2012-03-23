@@ -1,0 +1,15 @@
+*.class
+*.jar
+*.DS_Store
+*.thumb
+*.sql
+build/*
+nbproject/*
+lib/*
+build.xml
+manifest.mf
+/dist/
+*.props
+*.arff
+src/br/com/gaz/suggests/clusters/data/News.java
+src/br/com/gaz/suggests/clusters/data/User.java
