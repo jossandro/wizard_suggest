@@ -24,9 +24,14 @@ public class Search {
             query.setPassword(properties.getProperty("database.pass"));
 
             query.setQuery(type.search());
-            query.getSparseData();
 
-            return query.retrieveInstances();
+            Instances resource = query.retrieveInstances();
+
+            if(resource.isEmpty()) {
+                throw new Exception("Resource " + type.getClass().getSimpleName() + " not found");
+            }
+
+            return resource;
         } catch (Exception ex) {
             Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
         }

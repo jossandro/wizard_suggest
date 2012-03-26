@@ -2,14 +2,12 @@
 package br.com.gaz.suggests.clusters;
 
 import br.com.gaz.suggests.clusters.filter.HTMLStripFilter;
+import br.com.gaz.suggests.clusters.util.Attribute;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import weka.clusterers.Clusterer;
 import weka.clusterers.SimpleKMeans;
 import weka.core.Instances;
 import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Add;
-import weka.filters.unsupervised.attribute.RemoveUseless;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 
 
@@ -28,12 +26,13 @@ public class Cluster {
 
         // Clusterizando
         SimpleKMeans group = new SimpleKMeans();
-
+        Attribute new_attr = new Attribute("CLUSTER_SUGGEST");
+        
         try {
             group.setNumClusters(num);
             group.setDisplayStdDevs(true);
 
-            this.instance = add_attribute(this.instance, "CLUSTER_SUGGEST", group);
+            this.instance = new_attr.add(this.instance, group);
         } catch (Exception ex) {
             Logger.getLogger(Cluster.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,30 +63,6 @@ public class Cluster {
 
     public Instances toInstance() {
         return this.instance;
-    }
-
-
-    private static Instances add_attribute(Instances instances, String attribute_name, Clusterer cluster)
-     throws Exception {
-        // http://weka.wikispaces.com/Adding+attributes+to+a+dataset
-        // Adicionando o atributo para os clusters
-        Add attr = new Add();
-        attr.setAttributeIndex("last");
-        attr.setAttributeName(attribute_name);
-        attr.setInputFormat(instances);
-        instances = Filter.useFilter(instances, attr);
-
-        cluster.buildClusterer(instances);
-
-        // Adicionando o cluster na lista
-        for(int x = 0; x < instances.numInstances(); x++) {
-            instances.instance(x).setValue(
-                instances.numAttributes() - 1,
-                cluster.clusterInstance(instances.get(x))
-            );
-        }
-
-        return instances;
     }
 
 
