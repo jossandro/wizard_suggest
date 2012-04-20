@@ -14,7 +14,7 @@ public class Attribute {
         name = attribute_name;
     }
 
-    public Instances add(Instances instances, Clusterer cluster)
+    public Instances addWithClustererInInstance(Instances instances, Clusterer cluster)
      throws Exception {
         // http://weka.wikispaces.com/Adding+attributes+to+a+dataset
         // Adicionando o atributo para os clusters

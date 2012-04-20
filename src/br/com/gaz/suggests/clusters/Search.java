@@ -1,6 +1,6 @@
 package br.com.gaz.suggests.clusters;
 
-import br.com.gaz.suggests.clusters.data.Type;
+import br.com.gaz.suggests.data.Type;
 import java.io.FileInputStream;
 import java.util.Properties;
 import java.util.logging.Level;

@@ -1,5 +1,5 @@
 
-package br.com.gaz.suggests.clusters.data;
+package br.com.gaz.suggests.data;
 
 public interface Type {
     String search();

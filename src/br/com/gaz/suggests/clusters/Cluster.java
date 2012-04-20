@@ -22,18 +22,17 @@ public class Cluster {
 
 
     public Cluster withKMeans(int num) {
-        this.stripTags();
-
         // Clusterizando
         SimpleKMeans group = new SimpleKMeans();
         Attribute new_attr = new Attribute("CLUSTER_SUGGEST");
-        
+
         try {
             group.setNumClusters(num);
             group.setDisplayStdDevs(true);
 
-            this.instance = new_attr.add(this.instance, group);
-        } catch (Exception ex) {
+            this.instance = new_attr.addWithClustererInInstance(this.instance, group);
+        }
+        catch (Exception ex) {
             Logger.getLogger(Cluster.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -53,7 +52,8 @@ public class Cluster {
             vector.setOutputWordCounts(true);
 
             this.instance = Filter.useFilter(this.instance, vector);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             Logger.getLogger(Cluster.class.getName()).log(Level.SEVERE, null, ex);
         }
 
